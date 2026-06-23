@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load academy_filters %}
+
+{% block title %}Pagamenti Maestre - Olympian's Dance Academy{% endblock %}
+
+{% block content %}
+<div class="animate-in">
+    <header class="header-container">
+        <div class="header-title">
+            <h1>Pagamenti Maestre</h1>
+            <p>Monitoraggio e gestione dei compensi del corpo docente.</p>
+        </div>
+    </header>
+
+    <div class="content-box">
+        <div class="box-header">
+            <h2>Compensi e Stipendi</h2>
+        </div>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Maestra</th>
+                        <th>Descrizione</th>
+                        <th>Importo</th>
+                        <th>Scadenza</th>
+                        <th>Stato</th>
+                        <th>Azione</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pagamenti %}
+                    <tr>
+                        <td class="course-cell">{{ p.nome_maestra }} {{ p.cognome_maestra }}</td>
+                        <td>{{ p.descrizione }}</td>
+                        <td style="font-weight: 600;">€ {{ p.importo|floatformat:2 }}</td>
+                        <td style="color: var(--text-muted);">{{ p.data_scadenza|date_dmy }}</td>
+                        <td>
+                            {% if p.stato == 'Pagato' %}
+                                <span class="badge badge-paid">Pagato</span>
+                            {% elif p.stato == 'In ritardo' %}
+                                <span class="badge badge-overdue">In ritardo</span>
+                            {% else %}
+                                <span class="badge badge-pending">Da pagare</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if p.stato != 'Pagato' %}
+                                <a href="{% url 'paga_maestra' p.id %}" class="btn btn-purple btn-sm">
+                                    Segna Pagato
+                                </a>
+                            {% else %}
+                                <span style="font-size: 0.8rem; color: #166534; font-weight: 600;">Saldato il {{ p.data_pagamento|date_dmy }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load academy_filters %}
+
+{% block title %}Maestre - Olympian's Dance Academy{% endblock %}
+
+{% block content %}
+<div class="animate-in">
+    <header class="header-container">
+        <div class="header-title">
+            <h1>Corpo Docente</h1>
+            <p>Le professioniste e i professionisti della nostra accademia.</p>
+        </div>
+        <a href="{% url 'nuova_maestra' %}" class="btn btn-gold">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>
+            Aggiungi Docente
+        </a>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        {% for m in maestre %}
+        <div class="content-box stat-card" style="flex-direction: column; align-items: flex-start; gap: 1rem; padding: 2rem;">
+            <div style="display: flex; align-items: center; gap: 1.5rem; width: 100%;">
+                <div class="user-avatar" style="width: 60px; height: 60px; font-size: 1.2rem;">
+                    {{ m.nome|initial }}{{ m.cognome|initial }}
+                </div>
+                <div>
+                    <h2 style="font-size: 1.2rem; margin-bottom: 0.2rem;">{{ m.nome }} {{ m.cognome }}</h2>
+                    <span class="badge badge-paid" style="background: var(--secondary-color); color: white;">{{ m.specializzazione }}</span>
+                </div>
+            </div>
+            
+            <div style="width: 100%; border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Telefono:</span>
+                    <span style="font-weight: 600; font-size: 0.85rem;">{{ m.telefono }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Email:</span>
+                    <span style="font-weight: 600; font-size: 0.85rem;">{{ m.email }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Compenso:</span>
+                    <span style="font-weight: 700; color: var(--secondary-color);">€ {{ m.compenso_mensile|floatformat:2 }} / mese</span>
+                </div>
+            </div>
+
+            <a href="{% url 'pagamenti_maestre' %}" class="btn btn-outline-purple btn-sm" style="width: 100%; margin-top: 1rem;">
+                Vedi Pagamenti
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
