@@ -35,6 +35,30 @@ File principali:
 - `academy/views.py`: viste Django e query tramite ORM.
 - `academy/models.py`: modelli dati collegati alle tabelle SQLite.
 
+## Struttura del repository
+
+- `manage.py`
+- `requirements.txt`
+- `Scuola.db`
+- `dump_clean.sql`
+- `README.md`
+- `Relazione.docx`
+- `dance_academy/`
+  - `settings.py`
+  - `urls.py`
+  - `wsgi.py`
+- `academy/`
+  - `admin.py`
+  - `apps.py`
+  - `context_processors.py`
+  - `models.py`
+  - `urls.py`
+  - `views.py`
+  - `migrations/`
+  - `templatetags/`
+- `templates/`
+- `static/`
+
 ## Installazione ed avvio
 
 Requisiti consigliati:
